@@ -1,0 +1,462 @@
+[00:00:00.630] Server  LOG      ✓ Ready in 403ms
+[00:00:05.147] Server  ERROR    ⨯ ./app/page.tsx:6:1
+Module not found: Can't resolve '@/components/built-on-horizen'
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+> 6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { UseCases } from "@/components/use-cases"
+  8 | import { TokenEconomics } from "@/components/token-economics"
+  9 | import { Roadmap } from "@/components/roadmap"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:10:1
+Module not found: Can't resolve '@/components/faq'
+   8 | import { TokenEconomics } from "@/components/token-economics"
+   9 | import { Roadmap } from "@/components/roadmap"
+> 10 | import { FAQ } from "@/components/faq"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { Footer } from "@/components/footer"
+  12 | import { Navigation } from "@/components/navigation"
+  13 |
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:4:1
+Module not found: Can't resolve '@/components/features'
+  2 | import { WhyPrivacy } from "@/components/why-privacy"
+  3 | import { HowItWorks } from "@/components/how-it-works"
+> 4 | import { Features } from "@/components/features"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { ForDevelopers } from "@/components/for-developers"
+  6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+  7 | import { UseCases } from "@/components/use-cases"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:11:1
+Module not found: Can't resolve '@/components/footer'
+   9 | import { Roadmap } from "@/components/roadmap"
+  10 | import { FAQ } from "@/components/faq"
+> 11 | import { Footer } from "@/components/footer"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 | import { Navigation } from "@/components/navigation"
+  13 |
+  14 | export default function Home() {
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:5:1
+Module not found: Can't resolve '@/components/for-developers'
+  3 | import { HowItWorks } from "@/components/how-it-works"
+  4 | import { Features } from "@/components/features"
+> 5 | import { ForDevelopers } from "@/components/for-developers"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+  7 | import { UseCases } from "@/components/use-cases"
+  8 | import { TokenEconomics } from "@/components/token-economics"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:1:1
+Module not found: Can't resolve '@/components/hero'
+> 1 | import { Hero } from "@/components/hero"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import { WhyPrivacy } from "@/components/why-privacy"
+  3 | import { HowItWorks } from "@/components/how-it-works"
+  4 | import { Features } from "@/components/features"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:3:1
+Module not found: Can't resolve '@/components/how-it-works'
+  1 | import { Hero } from "@/components/hero"
+  2 | import { WhyPrivacy } from "@/components/why-privacy"
+> 3 | import { HowItWorks } from "@/components/how-it-works"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+  6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:12:1
+Module not found: Can't resolve '@/components/navigation'
+  10 | import { FAQ } from "@/components/faq"
+  11 | import { Footer } from "@/components/footer"
+> 12 | import { Navigation } from "@/components/navigation"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Home() {
+  15 |   return (
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/roadmap'
+   7 | import { UseCases } from "@/components/use-cases"
+   8 | import { TokenEconomics } from "@/components/token-economics"
+>  9 | import { Roadmap } from "@/components/roadmap"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { FAQ } from "@/components/faq"
+  11 | import { Footer } from "@/components/footer"
+  12 | import { Navigation } from "@/components/navigation"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:8:1
+Module not found: Can't resolve '@/components/token-economics'
+   6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+   7 | import { UseCases } from "@/components/use-cases"
+>  8 | import { TokenEconomics } from "@/components/token-economics"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { Roadmap } from "@/components/roadmap"
+  10 | import { FAQ } from "@/components/faq"
+  11 | import { Footer } from "@/components/footer"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:7:1
+Module not found: Can't resolve '@/components/use-cases'
+   5 | import { ForDevelopers } from "@/components/for-developers"
+   6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+>  7 | import { UseCases } from "@/components/use-cases"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { TokenEconomics } from "@/components/token-economics"
+   9 | import { Roadmap } from "@/components/roadmap"
+  10 | import { FAQ } from "@/components/faq"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+
+./app/page.tsx:2:1
+Module not found: Can't resolve '@/components/why-privacy'
+  1 | import { Hero } from "@/components/hero"
+> 2 | import { WhyPrivacy } from "@/components/why-privacy"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { HowItWorks } from "@/components/how-it-works"
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:05.772] Browser ERROR   uncaughtError: Error: ./app/page.tsx:6:1
+Module not found: Can't resolve '@/components/built-on-horizen'
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+> 6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { UseCases } from "@/components/use-cases"
+  8 | import { TokenEconomics } from "@/components/token-economics"
+  9 | import { Roadmap } from "@/components/roadmap"
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[00:00:05.937] Browser ERROR   ./app/page.tsx:6:1
+Module not found: Can't resolve '@/components/built-on-horizen'
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+> 6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { UseCases } from "@/components/use-cases"
+  8 | import { TokenEconomics } from "@/components/token-economics"
+  9 | import { Roadmap } from "@/components/roadmap"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:10:1
+Module not found: Can't resolve '@/components/faq'
+   8 | import { TokenEconomics } from "@/components/token-economics"
+   9 | import { Roadmap } from "@/components/roadmap"
+> 10 | import { FAQ } from "@/components/faq"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { Footer } from "@/components/footer"
+  12 | import { Navigation } from "@/components/navigation"
+  13 |
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:4:1
+Module not found: Can't resolve '@/components/features'
+  2 | import { WhyPrivacy } from "@/components/why-privacy"
+  3 | import { HowItWorks } from "@/components/how-it-works"
+> 4 | import { Features } from "@/components/features"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { ForDevelopers } from "@/components/for-developers"
+  6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+  7 | import { UseCases } from "@/components/use-cases"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:11:1
+Module not found: Can't resolve '@/components/footer'
+   9 | import { Roadmap } from "@/components/roadmap"
+  10 | import { FAQ } from "@/components/faq"
+> 11 | import { Footer } from "@/components/footer"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 | import { Navigation } from "@/components/navigation"
+  13 |
+  14 | export default function Home() {
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:5:1
+Module not found: Can't resolve '@/components/for-developers'
+  3 | import { HowItWorks } from "@/components/how-it-works"
+  4 | import { Features } from "@/components/features"
+> 5 | import { ForDevelopers } from "@/components/for-developers"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+  7 | import { UseCases } from "@/components/use-cases"
+  8 | import { TokenEconomics } from "@/components/token-economics"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:1:1
+Module not found: Can't resolve '@/components/hero'
+> 1 | import { Hero } from "@/components/hero"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import { WhyPrivacy } from "@/components/why-privacy"
+  3 | import { HowItWorks } from "@/components/how-it-works"
+  4 | import { Features } from "@/components/features"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:3:1
+Module not found: Can't resolve '@/components/how-it-works'
+  1 | import { Hero } from "@/components/hero"
+  2 | import { WhyPrivacy } from "@/components/why-privacy"
+> 3 | import { HowItWorks } from "@/components/how-it-works"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+  6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:12:1
+Module not found: Can't resolve '@/components/navigation'
+  10 | import { FAQ } from "@/components/faq"
+  11 | import { Footer } from "@/components/footer"
+> 12 | import { Navigation } from "@/components/navigation"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Home() {
+  15 |   return (
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/roadmap'
+   7 | import { UseCases } from "@/components/use-cases"
+   8 | import { TokenEconomics } from "@/components/token-economics"
+>  9 | import { Roadmap } from "@/components/roadmap"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { FAQ } from "@/components/faq"
+  11 | import { Footer } from "@/components/footer"
+  12 | import { Navigation } from "@/components/navigation"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:8:1
+Module not found: Can't resolve '@/components/token-economics'
+   6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+   7 | import { UseCases } from "@/components/use-cases"
+>  8 | import { TokenEconomics } from "@/components/token-economics"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { Roadmap } from "@/components/roadmap"
+  10 | import { FAQ } from "@/components/faq"
+  11 | import { Footer } from "@/components/footer"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:7:1
+Module not found: Can't resolve '@/components/use-cases'
+   5 | import { ForDevelopers } from "@/components/for-developers"
+   6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+>  7 | import { UseCases } from "@/components/use-cases"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { TokenEconomics } from "@/components/token-economics"
+   9 | import { Roadmap } from "@/components/roadmap"
+  10 | import { FAQ } from "@/components/faq"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:05.937] Browser ERROR   ./app/page.tsx:2:1
+Module not found: Can't resolve '@/components/why-privacy'
+  1 | import { Hero } from "@/components/hero"
+> 2 | import { WhyPrivacy } from "@/components/why-privacy"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { HowItWorks } from "@/components/how-it-works"
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:6:1
+Module not found: Can't resolve '@/components/built-on-horizen'
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+> 6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import { UseCases } from "@/components/use-cases"
+  8 | import { TokenEconomics } from "@/components/token-economics"
+  9 | import { Roadmap } from "@/components/roadmap"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:10:1
+Module not found: Can't resolve '@/components/faq'
+   8 | import { TokenEconomics } from "@/components/token-economics"
+   9 | import { Roadmap } from "@/components/roadmap"
+> 10 | import { FAQ } from "@/components/faq"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  11 | import { Footer } from "@/components/footer"
+  12 | import { Navigation } from "@/components/navigation"
+  13 |
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:4:1
+Module not found: Can't resolve '@/components/features'
+  2 | import { WhyPrivacy } from "@/components/why-privacy"
+  3 | import { HowItWorks } from "@/components/how-it-works"
+> 4 | import { Features } from "@/components/features"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { ForDevelopers } from "@/components/for-developers"
+  6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+  7 | import { UseCases } from "@/components/use-cases"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:11:1
+Module not found: Can't resolve '@/components/footer'
+   9 | import { Roadmap } from "@/components/roadmap"
+  10 | import { FAQ } from "@/components/faq"
+> 11 | import { Footer } from "@/components/footer"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  12 | import { Navigation } from "@/components/navigation"
+  13 |
+  14 | export default function Home() {
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:5:1
+Module not found: Can't resolve '@/components/for-developers'
+  3 | import { HowItWorks } from "@/components/how-it-works"
+  4 | import { Features } from "@/components/features"
+> 5 | import { ForDevelopers } from "@/components/for-developers"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+  7 | import { UseCases } from "@/components/use-cases"
+  8 | import { TokenEconomics } from "@/components/token-economics"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:1:1
+Module not found: Can't resolve '@/components/hero'
+> 1 | import { Hero } from "@/components/hero"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  2 | import { WhyPrivacy } from "@/components/why-privacy"
+  3 | import { HowItWorks } from "@/components/how-it-works"
+  4 | import { Features } from "@/components/features"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:3:1
+Module not found: Can't resolve '@/components/how-it-works'
+  1 | import { Hero } from "@/components/hero"
+  2 | import { WhyPrivacy } from "@/components/why-privacy"
+> 3 | import { HowItWorks } from "@/components/how-it-works"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+  6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:12:1
+Module not found: Can't resolve '@/components/navigation'
+  10 | import { FAQ } from "@/components/faq"
+  11 | import { Footer } from "@/components/footer"
+> 12 | import { Navigation } from "@/components/navigation"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  13 |
+  14 | export default function Home() {
+  15 |   return (
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:9:1
+Module not found: Can't resolve '@/components/roadmap'
+   7 | import { UseCases } from "@/components/use-cases"
+   8 | import { TokenEconomics } from "@/components/token-economics"
+>  9 | import { Roadmap } from "@/components/roadmap"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  10 | import { FAQ } from "@/components/faq"
+  11 | import { Footer } from "@/components/footer"
+  12 | import { Navigation } from "@/components/navigation"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:8:1
+Module not found: Can't resolve '@/components/token-economics'
+   6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+   7 | import { UseCases } from "@/components/use-cases"
+>  8 | import { TokenEconomics } from "@/components/token-economics"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   9 | import { Roadmap } from "@/components/roadmap"
+  10 | import { FAQ } from "@/components/faq"
+  11 | import { Footer } from "@/components/footer"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:7:1
+Module not found: Can't resolve '@/components/use-cases'
+   5 | import { ForDevelopers } from "@/components/for-developers"
+   6 | import { BuiltOnHorizen } from "@/components/built-on-horizen"
+>  7 | import { UseCases } from "@/components/use-cases"
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   8 | import { TokenEconomics } from "@/components/token-economics"
+   9 | import { Roadmap } from "@/components/roadmap"
+  10 | import { FAQ } from "@/components/faq"
+
+https://nextjs.org/docs/messages/module-not-found
+[00:00:06.056] Browser ERROR   ./app/page.tsx:2:1
+Module not found: Can't resolve '@/components/why-privacy'
+  1 | import { Hero } from "@/components/hero"
+> 2 | import { WhyPrivacy } from "@/components/why-privacy"
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  3 | import { HowItWorks } from "@/components/how-it-works"
+  4 | import { Features } from "@/components/features"
+  5 | import { ForDevelopers } from "@/components/for-developers"
+
+https://nextjs.org/docs/messages/module-not-found
