@@ -30,9 +30,11 @@ export function ForDevelopers() {
               ))}
             </div>
 
+            <a href="/docs">
             <Button size="lg" className="gap-2">
               View Documentation
             </Button>
+            </a>
           </div>
 
           <div className="rounded-xl border border-border bg-card overflow-hidden">

@@ -23,9 +23,9 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
-            <a href="#early-access">
+            <a href="https://discord.gg/9DuwYJq7bf" target="_blank" rel="noopener noreferrer">
             <Button size="lg" className="gap-2">
-              Request Early Access <ArrowRight className="h-4 w-4" />
+              Join our Discord for news <ArrowRight className="h-4 w-4" />
             </Button>
             </a>
             <a href="/docs">
