@@ -11,14 +11,14 @@ const phases = [
     title: "Mainnet Launch",
     description:
       "Production mainnet deployment with ZEN billing, full Horizen Base integration, and enterprise-ready features.",
-    status: "Q2 2025",
+    status: "Q2 2026",
   },
   {
     phase: "Phase 3",
     title: "AI Compute Marketplace",
     description:
       "Decentralized marketplace for third-party model providers, staking mechanisms, and advanced governance.",
-    status: "Q4 2025",
+    status: "Q4 2026",
   },
 ]
 

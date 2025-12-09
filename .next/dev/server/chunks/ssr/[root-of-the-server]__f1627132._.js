@@ -73,7 +73,7 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
     throw e;
 })();
 (()=>{
-    const e = new Error("Cannot find module '@/components/navigation'");
+    const e = new Error("Cannot find module '@/components/navigation.tsx'");
     e.code = 'MODULE_NOT_FOUND';
     throw e;
 })();

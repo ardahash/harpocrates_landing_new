@@ -1,3 +1,12 @@
 {
+  "/docs/api-reference/page": "app/docs/api-reference/page.js",
+  "/docs/concepts/page": "app/docs/concepts/page.js",
+  "/docs/models/page": "app/docs/models/page.js",
+  "/docs/page": "app/docs/page.js",
+  "/docs/production/page": "app/docs/production/page.js",
+  "/docs/quickstart/page": "app/docs/quickstart/page.js",
+  "/docs/sdk-guides/page": "app/docs/sdk-guides/page.js",
+  "/docs/security/page": "app/docs/security/page.js",
+  "/docs/zen-integration/page": "app/docs/zen-integration/page.js",
   "/page": "app/page.js"
 }

@@ -17,7 +17,7 @@ export default function QuickstartPage() {
 
       <DocSection>
         <DocHeading level={2} id="installation">
-          Installation
+          Installation (NOT LIVE YET, PLEASE DO NOT TRY)
         </DocHeading>
 
         <h3 className="text-lg font-semibold mb-3 mt-6">JavaScript / TypeScript</h3>

@@ -23,12 +23,16 @@ export function Hero() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+            <a href="#early-access">
             <Button size="lg" className="gap-2">
               Request Early Access <ArrowRight className="h-4 w-4" />
             </Button>
+            </a>
+            <a href="/docs">
             <Button size="lg" variant="outline">
               Read the Docs
             </Button>
+            </a>
           </div>
 
           <p className="text-sm text-muted-foreground pt-2">Privacy-first AI infrastructure • Metered in ZEN</p>
