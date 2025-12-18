@@ -20,6 +20,16 @@ export function Navigation() {
           <a href="#roadmap" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
             Roadmap
           </a>
+          <Link href="/dashboard">
+            <Button size="sm" variant="ghost">
+              Dashboard
+            </Button>
+          </Link>
+          <Link href="/dev-health">
+            <Button size="sm" variant="ghost">
+              Dev Health
+            </Button>
+          </Link>
           <Link href="/docs">
             <Button variant="outline" size="sm">
               Read the Docs
