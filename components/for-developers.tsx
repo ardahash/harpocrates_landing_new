@@ -3,7 +3,7 @@ import { CheckCircle } from "lucide-react"
 
 const devFeatures = [
   "Simple JS and Python SDKs",
-  "Deterministic billing in ZEN",
+  "Deterministic billing in ETH on Horizen L3",
   "Local encryption helpers",
   "Copy-paste examples for common workloads",
 ]

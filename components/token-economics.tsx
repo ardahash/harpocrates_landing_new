@@ -3,20 +3,18 @@ import { Coins, TrendingUp, Store } from "lucide-react"
 const economics = [
   {
     icon: Coins,
-    title: "Pay per inference in ZEN",
-    description:
-      "Simple, transparent pricing. Pay only for the compute you use with deterministic on-chain settlement.",
+    title: "Pay per inference in ETH on Horizen L3",
+    description: "Simple, transparent pricing. Pay only for the compute you use with deterministic on-chain settlement.",
   },
   {
     icon: TrendingUp,
-    title: "Staking tiers for higher throughput",
-    description: "Stake ZEN to unlock priority access, higher rate limits, and preferential pricing for power users.",
+    title: "Throughput tiers with funding controls",
+    description: "Fund with ETH to unlock higher rate limits and preferential pricing as your usage scales.",
   },
   {
     icon: Store,
     title: "Future: AI Compute Marketplace",
-    description:
-      "Model providers can offer their models and earn ZEN. Users choose from a marketplace of verified private models.",
+    description: "Model providers can offer their models and earn ETH on Horizen L3 in a verified private marketplace.",
   },
 ]
 
@@ -27,7 +25,7 @@ export function TokenEconomics() {
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-5xl font-bold mb-4">Token & Economics</h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Simple, transparent economics powered by ZEN
+            Simple, transparent economics powered by ETH on Horizen L3
           </p>
         </div>
 

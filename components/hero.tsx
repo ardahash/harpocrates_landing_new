@@ -18,7 +18,7 @@ export function Hero() {
           </h1>
 
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-            Send encrypted prompts → enclave runs inference → get verifiable outputs. No one, not even us, can see your
+            Send encrypted prompts, enclave runs inference, get verifiable outputs. No one, not even us, can see your
             data.
           </p>
 
@@ -35,7 +35,7 @@ export function Hero() {
             </a>
           </div>
 
-          <p className="text-sm text-muted-foreground pt-2">Privacy-first AI infrastructure • Metered in ZEN</p>
+          <p className="text-sm text-muted-foreground pt-2">Privacy-first AI infrastructure | Metered in ETH on Horizen L3</p>
         </div>
 
         {/* Visual representation */}

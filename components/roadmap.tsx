@@ -10,7 +10,7 @@ const phases = [
     phase: "Phase 2",
     title: "Mainnet Launch",
     description:
-      "Production mainnet deployment with ZEN billing, full Horizen Base integration, and enterprise-ready features.",
+      "Production mainnet deployment with ETH billing on Horizen L3 (migrating to ZEN when live), plus enterprise-ready features.",
     status: "Q2 2026",
   },
   {

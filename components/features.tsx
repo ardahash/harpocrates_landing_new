@@ -21,9 +21,9 @@ const features = [
   },
   {
     icon: Coins,
-    title: "ZEN-based metering and billing",
+    title: "ETH-based metering and billing",
     description:
-      "Transparent, deterministic billing in ZEN tokens. Pay only for what you use with on-chain settlement.",
+      "Transparent, deterministic billing in ETH on Horizen L3. Pay only for what you use with on-chain settlement.",
   },
   {
     icon: Code,
