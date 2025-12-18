@@ -42,8 +42,8 @@ export default function FAQPage() {
             <h3 className="text-lg font-semibold mb-2">How much does Harpocrates cost compared to OpenAI?</h3>
             <p className="text-muted-foreground leading-relaxed">
               Pricing is competitive with major AI providers. The privacy guarantees and on-chain transparency justify
-              the premium. Current rates start at 0.0001 ZEN per token (~$0.007 per 1K tokens), with volume discounts
-              available.
+              the premium. Current rates are denominated in ETH on Horizen L3 (for example, 0.0001 ETH per token on
+              testnet); check your dashboard for live pricing and available volume discounts.
             </p>
           </div>
 
@@ -74,19 +74,18 @@ export default function FAQPage() {
           </div>
 
           <div>
-            <h3 className="text-lg font-semibold mb-2">What is ZEN and why do I need it?</h3>
+            <h3 className="text-lg font-semibold mb-2">Why is billing in ETH on Horizen L3?</h3>
             <p className="text-muted-foreground leading-relaxed">
-              ZEN is the native token of the Horizen blockchain. Harpocrates uses ZEN for transparent, on-chain billing
-              and metering. This eliminates vendor lock-in and provides verifiable receipts for all inference requests.
-              You can acquire ZEN from major crypto exchanges.
+              ZEN is not yet live on the Horizen L3 mainnet, so Harpocrates currently meters and settles usage in ETH on
+              Horizen L3 for transparent, on-chain billing and verifiable receipts.
             </p>
           </div>
 
           <div>
             <h3 className="text-lg font-semibold mb-2">Is there a free tier or trial?</h3>
             <p className="text-muted-foreground leading-relaxed">
-              Yes! New users receive 10 ZEN (~$70) in testnet credits to explore the platform. For production use, we
-              offer pay-as-you-go pricing with no minimum commitment.
+              Yes! New users receive testnet ETH credits to explore the platform. For production use, we offer
+              pay-as-you-go pricing with no minimum commitment.
             </p>
           </div>
 

@@ -155,7 +155,7 @@ print(f"Attestation valid: {valid}")`}
           Testing on Horizen Testnet
         </DocHeading>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          During development, you can test against the Horizen testnet without spending real ZEN tokens:
+          During development, you can test against the Horizen testnet without spending real ETH:
         </p>
 
         <CodeBlock language="javascript">
@@ -166,7 +166,7 @@ print(f"Attestation valid: {valid}")`}
         </CodeBlock>
 
         <p className="text-muted-foreground leading-relaxed mt-4">
-          Get testnet ZEN tokens from the Horizen faucet to test billing and metering features.
+          Get testnet ETH from the Horizen faucet to test billing and metering features.
         </p>
       </DocSection>
 

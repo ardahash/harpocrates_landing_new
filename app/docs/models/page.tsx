@@ -34,7 +34,7 @@ export default function ModelsPage() {
               </div>
               <div>
                 <span className="text-muted-foreground">Cost:</span>
-                <span className="ml-2 font-semibold">0.0001 ZEN/token</span>
+                <span className="ml-2 font-semibold">0.0001 ETH/token</span>
               </div>
             </div>
           </div>
@@ -52,7 +52,7 @@ export default function ModelsPage() {
               </div>
               <div>
                 <span className="text-muted-foreground">Cost:</span>
-                <span className="ml-2 font-semibold">0.00025 ZEN/token</span>
+                <span className="ml-2 font-semibold">0.00025 ETH/token</span>
               </div>
             </div>
           </div>
@@ -70,7 +70,7 @@ export default function ModelsPage() {
               </div>
               <div>
                 <span className="text-muted-foreground">Cost:</span>
-                <span className="ml-2 font-semibold">0.00005 ZEN/token</span>
+                <span className="ml-2 font-semibold">0.00005 ETH/token</span>
               </div>
             </div>
           </div>
@@ -96,7 +96,7 @@ export default function ModelsPage() {
               </div>
               <div>
                 <span className="text-muted-foreground">Cost:</span>
-                <span className="ml-2 font-semibold">0.00002 ZEN/token</span>
+                <span className="ml-2 font-semibold">0.00002 ETH/token</span>
               </div>
             </div>
           </div>
@@ -113,7 +113,7 @@ export default function ModelsPage() {
               </div>
               <div>
                 <span className="text-muted-foreground">Cost:</span>
-                <span className="ml-2 font-semibold">0.00004 ZEN/token</span>
+                <span className="ml-2 font-semibold">0.00004 ETH/token</span>
               </div>
             </div>
           </div>

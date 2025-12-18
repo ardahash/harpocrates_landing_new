@@ -30,7 +30,7 @@ const navigation = [
   {
     title: "Integration",
     items: [
-      { title: "ZEN Integration", href: "/docs/zen-integration" },
+      { title: "Settlement on Horizen L3", href: "/docs/zen-integration" },
       { title: "Production", href: "/docs/production" },
       { title: "Security & Privacy", href: "/docs/security" },
     ],

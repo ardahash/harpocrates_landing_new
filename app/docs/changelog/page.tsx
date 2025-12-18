@@ -24,14 +24,14 @@ export default function ChangelogPage() {
                 <h3 className="text-sm font-semibold text-green-400 mb-2">New Features</h3>
                 <ul className="space-y-1 text-sm text-muted-foreground">
                   <li>
-                    • Added <code className="text-xs bg-muted px-1 rounded">llm-secure-fast</code> model for low-latency
+                    ƒ?› Added <code className="text-xs bg-muted px-1 rounded">llm-secure-fast</code> model for low-latency
                     inference
                   </li>
-                  <li>• Streaming responses now in beta (contact support to enable)</li>
-                  <li>• Python SDK now supports async/await patterns</li>
-                  <li>• Added spending limit controls via API and dashboard</li>
+                  <li>ƒ?› Streaming responses now in beta (contact support to enable)</li>
+                  <li>ƒ?› Python SDK now supports async/await patterns</li>
+                  <li>ƒ?› Added spending limit controls via API and dashboard</li>
                   <li>
-                    • New embedding model: <code className="text-xs bg-muted px-1 rounded">embed-secure-large</code>{" "}
+                    ƒ?› New embedding model: <code className="text-xs bg-muted px-1 rounded">embed-secure-large</code>{" "}
                     (1536d)
                   </li>
                 </ul>
@@ -40,19 +40,19 @@ export default function ChangelogPage() {
               <div>
                 <h3 className="text-sm font-semibold text-blue-400 mb-2">Improvements</h3>
                 <ul className="space-y-1 text-sm text-muted-foreground">
-                  <li>• Reduced attestation verification time by 40%</li>
-                  <li>• Improved error messages with more actionable details</li>
-                  <li>• Enhanced dashboard with real-time usage graphs</li>
-                  <li>• SDK now automatically retries failed requests with exponential backoff</li>
+                  <li>ƒ?› Reduced attestation verification time by 40%</li>
+                  <li>ƒ?› Improved error messages with more actionable details</li>
+                  <li>ƒ?› Enhanced dashboard with real-time usage graphs</li>
+                  <li>ƒ?› SDK now automatically retries failed requests with exponential backoff</li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-sm font-semibold text-yellow-400 mb-2">Bug Fixes</h3>
                 <ul className="space-y-1 text-sm text-muted-foreground">
-                  <li>• Fixed race condition in key exchange protocol</li>
-                  <li>• Resolved memory leak in long-running inference sessions</li>
-                  <li>• Corrected ZEN pricing calculation for very small requests</li>
+                  <li>ƒ?› Fixed race condition in key exchange protocol</li>
+                  <li>ƒ?› Resolved memory leak in long-running inference sessions</li>
+                  <li>ƒ?› Corrected ETH pricing calculation for very small requests</li>
                 </ul>
               </div>
             </div>
@@ -68,31 +68,31 @@ export default function ChangelogPage() {
               <div>
                 <h3 className="text-sm font-semibold text-green-400 mb-2">New Features</h3>
                 <ul className="space-y-1 text-sm text-muted-foreground">
-                  <li>• Launch of JavaScript/TypeScript SDK</li>
+                  <li>ƒ?› Launch of JavaScript/TypeScript SDK</li>
                   <li>
-                    • Added <code className="text-xs bg-muted px-1 rounded">llm-secure-13b</code> model for complex
+                    ƒ?› Added <code className="text-xs bg-muted px-1 rounded">llm-secure-13b</code> model for complex
                     reasoning tasks
                   </li>
-                  <li>• On-chain attestation verification now available</li>
-                  <li>• Added usage analytics and monitoring dashboard</li>
-                  <li>• Support for custom temperature and max_tokens parameters</li>
+                  <li>ƒ?› On-chain attestation verification now available</li>
+                  <li>ƒ?› Added usage analytics and monitoring dashboard</li>
+                  <li>ƒ?› Support for custom temperature and max_tokens parameters</li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-sm font-semibold text-blue-400 mb-2">Improvements</h3>
                 <ul className="space-y-1 text-sm text-muted-foreground">
-                  <li>• Reduced inference latency by 25% through enclave optimizations</li>
-                  <li>• Improved documentation with more code examples</li>
-                  <li>• Enhanced API error responses with detailed error codes</li>
+                  <li>ƒ?› Reduced inference latency by 25% through enclave optimizations</li>
+                  <li>ƒ?› Improved documentation with more code examples</li>
+                  <li>ƒ?› Enhanced API error responses with detailed error codes</li>
                 </ul>
               </div>
 
               <div>
                 <h3 className="text-sm font-semibold text-yellow-400 mb-2">Bug Fixes</h3>
                 <ul className="space-y-1 text-sm text-muted-foreground">
-                  <li>• Fixed issue with large input contexts (&gt;4K tokens)</li>
-                  <li>• Resolved attestation timestamp validation edge case</li>
+                  <li>ƒ?› Fixed issue with large input contexts (&gt;4K tokens)</li>
+                  <li>ƒ?› Resolved attestation timestamp validation edge case</li>
                 </ul>
               </div>
             </div>
@@ -108,18 +108,18 @@ export default function ChangelogPage() {
               <div>
                 <h3 className="text-sm font-semibold text-green-400 mb-2">Initial Release</h3>
                 <ul className="space-y-1 text-sm text-muted-foreground">
-                  <li>• Public beta launch of Harpocrates platform</li>
-                  <li>• Python SDK with encryption and attestation support</li>
+                  <li>ƒ?› Public beta launch of Harpocrates platform</li>
+                  <li>ƒ?› Python SDK with encryption and attestation support</li>
                   <li>
-                    • Base language model: <code className="text-xs bg-muted px-1 rounded">llm-secure-7b</code>
+                    ƒ?› Base language model: <code className="text-xs bg-muted px-1 rounded">llm-secure-7b</code>
                   </li>
                   <li>
-                    • Embedding model: <code className="text-xs bg-muted px-1 rounded">embed-secure-base</code>
+                    ƒ?› Embedding model: <code className="text-xs bg-muted px-1 rounded">embed-secure-base</code>
                   </li>
-                  <li>• Intel SGX and AMD SEV-SNP enclave support</li>
-                  <li>• ZEN token integration for on-chain billing</li>
-                  <li>• REST API for inference and verification</li>
-                  <li>• Testnet environment for development</li>
+                  <li>ƒ?› Intel SGX and AMD SEV-SNP enclave support</li>
+                  <li>ƒ?› ETH settlement integration on Horizen L3 for on-chain billing</li>
+                  <li>ƒ?› REST API for inference and verification</li>
+                  <li>ƒ?› Testnet environment for development</li>
                 </ul>
               </div>
             </div>

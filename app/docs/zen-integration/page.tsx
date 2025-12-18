@@ -3,15 +3,15 @@ import { DocSection } from "@/components/docs/doc-section"
 import { CodeBlock } from "@/components/docs/code-block"
 import { Callout } from "@/components/docs/callout"
 
-export default function ZENIntegrationPage() {
+export default function SettlementIntegrationPage() {
   return (
     <div className="max-w-4xl">
-      <DocHeading level={1}>ZEN Integration</DocHeading>
+      <DocHeading level={1}>Settlement on Horizen L3</DocHeading>
 
       <DocSection>
         <p className="text-muted-foreground leading-relaxed mb-6">
-          Understand how Harpocrates uses ZEN tokens for transparent, on-chain billing and metering of AI inference
-          requests.
+          Understand how Harpocrates uses ETH on Horizen L3 for transparent, on-chain billing and metering of AI
+          inference requests while ZEN is not yet live on the L3 mainnet.
         </p>
       </DocSection>
 
@@ -20,20 +20,20 @@ export default function ZENIntegrationPage() {
           How Inference Billing Works
         </DocHeading>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          Every inference request on Harpocrates is metered and settled using ZEN tokens on the Horizen blockchain.
-          Here's the flow:
+          Every inference request on Harpocrates is metered and settled in ETH on the Horizen L3 blockchain. Here's the
+          flow:
         </p>
 
         <ol className="space-y-3 text-muted-foreground mb-4 list-decimal list-inside">
           <li>You make an inference request with encrypted data</li>
           <li>The TEE enclave processes your request and generates a ZK attestation</li>
           <li>Usage metrics (input/output tokens) are recorded on-chain</li>
-          <li>ZEN tokens are automatically deducted from your account balance</li>
+          <li>ETH is automatically deducted from your account balance</li>
           <li>You receive an on-chain receipt for the transaction</li>
         </ol>
 
         <Callout type="info">
-          All billing is transparent and auditable. You can verify every charge on the Horizen blockchain using the
+          All billing is transparent and auditable. You can verify every charge on the Horizen L3 blockchain using the
           transaction hash.
         </Callout>
       </DocSection>
@@ -52,7 +52,7 @@ export default function ZENIntegrationPage() {
   "usage": {
     "input_tokens": 42,
     "output_tokens": 128,
-    "cost_zen": "0.00025",
+    "cost_eth": "0.00025",
     "transaction_hash": "0xabcd1234...5678efgh",
     "block_number": 1234567,
     "timestamp": 1704067200
@@ -72,7 +72,7 @@ const receipt = await client.getTransactionReceipt(
 
 console.log("Verified on-chain:", receipt.confirmed);
 console.log("Block:", receipt.block_number);
-console.log("Cost:", receipt.cost_zen, "ZEN");`}
+console.log("Cost:", receipt.cost_eth, "ETH");`}
         </CodeBlock>
       </DocSection>
 
@@ -88,13 +88,13 @@ console.log("Cost:", receipt.cost_zen, "ZEN");`}
           {`// Set a daily spending limit
 await client.setSpendingLimit({
   period: "daily",
-  limit_zen: "10.0" // 10 ZEN per day
+  limit_eth: "0.1" // 0.1 ETH per day
 });
 
 // Set a per-request limit
 await client.setSpendingLimit({
   period: "per_request",
-  limit_zen: "0.1" // Max 0.1 ZEN per inference
+  limit_eth: "0.01" // Max 0.01 ETH per inference
 });`}
         </CodeBlock>
 
@@ -123,7 +123,7 @@ await client.setSpendingLimit({
     "input_tokens": 156,
     "output_tokens": 412,
     "total_tokens": 568,
-    "cost_zen": "0.000568",
+    "cost_eth": "0.000568",
     "cost_usd": "0.042",
     "transaction_hash": "0x1234abcd...efgh5678",
     "block_number": 1234567,
@@ -149,30 +149,30 @@ await client.setSpendingLimit({
 
         <ul className="space-y-2 text-muted-foreground mb-4">
           <li className="flex gap-2">
-            <span className="text-primary">•</span>
+            <span className="text-primary">ƒ?›</span>
             <span>Only pay for actual inference tokens used</span>
           </li>
           <li className="flex gap-2">
-            <span className="text-primary">•</span>
+            <span className="text-primary">ƒ?›</span>
             <span>No minimum spending requirements</span>
           </li>
           <li className="flex gap-2">
-            <span className="text-primary">•</span>
-            <span>Automatic settlement with ZEN tokens</span>
+            <span className="text-primary">ƒ?›</span>
+            <span>Automatic settlement in ETH on Horizen L3</span>
           </li>
           <li className="flex gap-2">
-            <span className="text-primary">•</span>
+            <span className="text-primary">ƒ?›</span>
             <span>Transparent, verifiable pricing on-chain</span>
           </li>
           <li className="flex gap-2">
-            <span className="text-primary">•</span>
+            <span className="text-primary">ƒ?›</span>
             <span>Volume discounts available (contact sales)</span>
           </li>
         </ul>
 
         <Callout type="info">
-          Current pricing: 0.0001 ZEN per token for standard models. Prices are subject to change based on network
-          demand and are always posted on-chain.
+          Current pricing is denominated in ETH on Horizen L3 (for example: 0.0001 ETH per token on testnet). Prices are
+          subject to change based on network demand; always check your dashboard or on-chain data for the latest rates.
         </Callout>
       </DocSection>
 
@@ -180,14 +180,16 @@ await client.setSpendingLimit({
         <DocHeading level={2} id="funding-account">
           Funding Your Account
         </DocHeading>
-        <p className="text-muted-foreground leading-relaxed mb-4">Add ZEN to your Harpocrates account balance:</p>
+        <p className="text-muted-foreground leading-relaxed mb-4">
+          Add ETH on Horizen L3 to your Harpocrates account balance:
+        </p>
 
         <CodeBlock language="bash">
           {`# Get your account address
 harpocrates account address
 
-# Send ZEN to your account address from any wallet
-# Minimum deposit: 1 ZEN`}
+# Send ETH on Horizen L3 to your account address from any wallet
+# Minimum deposit: 0.01 ETH`}
         </CodeBlock>
 
         <p className="text-muted-foreground leading-relaxed mt-4 mb-4">
@@ -197,8 +199,8 @@ harpocrates account address
         <CodeBlock language="javascript">
           {`// Check your current balance
 const balance = await client.getBalance();
-console.log("Available ZEN:", balance.available);
-console.log("Reserved ZEN:", balance.reserved);
+console.log("Available ETH:", balance.available);
+console.log("Reserved ETH:", balance.reserved);
 console.log("Total:", balance.total);`}
         </CodeBlock>
       </DocSection>

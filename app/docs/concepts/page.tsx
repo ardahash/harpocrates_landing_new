@@ -99,11 +99,12 @@ export default function ConceptsPage() {
       </DocSection>
 
       <DocSection>
-        <DocHeading level={2} id="zen-billing">
-          ZEN-Based Billing
+        <DocHeading level={2} id="eth-billing">
+          ETH-Based Billing on Horizen L3
         </DocHeading>
         <p className="text-muted-foreground leading-relaxed mb-4">
-          All inference requests are metered and settled on the Horizen blockchain using ZEN tokens. This provides:
+          All inference requests are metered and settled on Horizen L3 using ETH while ZEN is not yet live on that
+          network. This provides:
         </p>
 
         <ul className="space-y-2 text-muted-foreground mb-4">

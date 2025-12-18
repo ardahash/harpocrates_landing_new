@@ -111,13 +111,13 @@ const stats = await client.getUsageStats({
 
 console.log("Total requests:", stats.total_requests);
 console.log("Total tokens:", stats.total_tokens);
-console.log("Total cost:", stats.total_cost_zen, "ZEN");
+console.log("Total cost:", stats.total_cost_eth, "ETH");
 console.log("Average latency:", stats.avg_latency_ms, "ms");
 
 // Set up alerts
 await client.createAlert({
   type: "spending_threshold",
-  threshold_zen: "100.0",
+  threshold_eth: "1.0",
   notification_email: "ops@example.com"
 });`}
         </CodeBlock>

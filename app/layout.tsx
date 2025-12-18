@@ -10,7 +10,7 @@ const _geistMono = Geist_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Harpocrates - Confidential AI Inference",
   description:
-    "Silence for your most sensitive AI workloads. Confidential AI inference on encrypted data with TEE + ZK guarantees, settled in ZEN on Horizen.",
+    "Silence for your most sensitive AI workloads. Confidential AI inference on encrypted data with TEE + ZK guarantees, settled in ETH on Horizen L3.",
   generator: "v0.app",
   icons: {
     icon: [

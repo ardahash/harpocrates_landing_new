@@ -68,7 +68,7 @@ export default function APIReferencePage() {
   "usage": {
     "input_tokens": 42,
     "output_tokens": 128,
-    "cost_zen": "0.00025"
+    "cost_eth": "0.00025"
   }
 }`}
         </CodeBlock>
@@ -136,7 +136,7 @@ export default function APIReferencePage() {
   "embedding": [0.023, -0.045, 0.891, ...],
   "usage": {
     "input_tokens": 15,
-    "cost_zen": "0.00005"
+    "cost_eth": "0.00005"
   }
 }`}
         </CodeBlock>

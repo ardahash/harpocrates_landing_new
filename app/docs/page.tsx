@@ -49,10 +49,11 @@ export default function IntroductionPage() {
           </div>
 
           <div className="border border-border rounded-lg p-6 bg-muted/20">
-            <h3 className="font-semibold text-lg mb-2">3. Verify + Settle in ZEN</h3>
+            <h3 className="font-semibold text-lg mb-2">3. Verify + Settle in ETH on Horizen L3</h3>
             <p className="text-sm text-muted-foreground">
               Zero-knowledge attestations prove that the computation was performed correctly inside the TEE. All
-              inference requests are metered and settled on-chain using ZEN tokens on the Horizen network.
+              inference requests are metered and settled on-chain in ETH on the Horizen L3 network while ZEN is not yet
+              live on that chain.
             </p>
           </div>
         </div>
@@ -143,9 +144,10 @@ export default function IntroductionPage() {
           </div>
 
           <div>
-            <h3 className="font-semibold mb-1">ZEN</h3>
+            <h3 className="font-semibold mb-1">Settlement (ETH on Horizen L3)</h3>
             <p className="text-sm text-muted-foreground">
-              The native token of the Horizen network used to meter and settle AI inference requests on Harpocrates.
+              Harpocrates currently meters and settles inference usage in ETH on Horizen L3 because ZEN is not yet
+              available on that network. Receipts remain on-chain for transparent verification.
             </p>
           </div>
         </div>
