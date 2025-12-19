@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { appConfig } from "@/lib/config"
+import { PrivacyDemo } from "@/components/dashboard/privacy-demo"
 
 export const metadata = {
   title: "Dashboard | Harpocrates",
@@ -86,6 +87,8 @@ export default function DashboardPage() {
             </div>
           ))}
         </section>
+
+        <PrivacyDemo />
 
         <section className="rounded-xl border border-border bg-card p-6 space-y-3">
           <div className="flex items-center justify-between">
