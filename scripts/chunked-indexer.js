@@ -15,6 +15,46 @@
 const fs = require("fs")
 const path = require("path")
 const { ethers } = require("ethers")
+
+function loadEnvFile(filePath) {
+  if (!filePath || !fs.existsSync(filePath)) return false
+  const lines = fs.readFileSync(filePath, "utf8").split(/\r?\n/)
+  for (const line of lines) {
+    const trimmed = line.trim()
+    if (!trimmed || trimmed.startsWith("#")) continue
+    const normalized = trimmed.startsWith("export ") ? trimmed.slice(7).trim() : trimmed
+    const eqIndex = normalized.indexOf("=")
+    if (eqIndex === -1) continue
+    const key = normalized.slice(0, eqIndex).trim()
+    let value = normalized.slice(eqIndex + 1).trim()
+    if (
+      (value.startsWith('"') && value.endsWith('"')) ||
+      (value.startsWith("'") && value.endsWith("'"))
+    ) {
+      value = value.slice(1, -1)
+    }
+    if (!Object.prototype.hasOwnProperty.call(process.env, key)) {
+      process.env[key] = value
+    }
+  }
+  return true
+}
+
+function loadEnv() {
+  const candidates = [
+    process.env.DOTENV_PATH,
+    path.join(__dirname, ".env"),
+    path.join(__dirname, "..", ".env"),
+  ].filter(Boolean)
+
+  for (const candidate of candidates) {
+    if (loadEnvFile(candidate)) {
+      return
+    }
+  }
+}
+
+loadEnv()
 const abi = [
   "event UserCharged(address indexed user, bytes32 indexed modelId, uint256 inputTokens, uint256 outputTokens, uint256 costWei, bytes32 usageHash)",
   "event UserFunded(address indexed user, uint256 amount)",
@@ -47,19 +87,30 @@ async function main() {
   let from = readProgress(fromEnv)
 
   const contract = new ethers.Contract(contractAddress, abi, provider)
+  const eventFilters = [
+    { name: "UserCharged", filter: contract.filters.UserCharged() },
+    { name: "UserFunded", filter: contract.filters.UserFunded() },
+    { name: "Withdrawn", filter: contract.filters.Withdrawn() },
+  ]
 
   while (from <= latest) {
     const to = Math.min(from + chunk, latest)
     console.log(`Querying blocks ${from} -> ${to}`)
-    const logs = await contract.queryFilter({}, from, to)
+    const logs = []
+    for (const eventFilter of eventFilters) {
+      const chunkLogs = await contract.queryFilter(eventFilter.filter, from, to)
+      logs.push(...chunkLogs)
+    }
+    logs.sort((a, b) => (a.blockNumber - b.blockNumber) || (a.logIndex - b.logIndex))
     const lines = logs.map((log) => {
       const parsed = contract.interface.parseLog(log)
-      return JSON.stringify({
+      const payload = {
         blockNumber: log.blockNumber,
         txHash: log.transactionHash,
         event: parsed.name,
         args: parsed.args,
-      })
+      }
+      return JSON.stringify(payload, (_key, value) => (typeof value === "bigint" ? value.toString() : value))
     })
     if (lines.length) {
       fs.appendFileSync(outFile, lines.join("\n") + "\n")

@@ -15,9 +15,13 @@ yarn-error.log
 .env.development.local
 .env.production.local
 .env.test.local
+/.*env
+/env.*.local
+/.*env.*local
 
 # Mac / Windows general
 .DS_Store
 Thumbs.db
 docs/spec.md
+
 /specdocs

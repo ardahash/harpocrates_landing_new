@@ -1,6 +1,6 @@
 'use client'
 
-import { useMemo, useState } from "react"
+import { useEffect, useMemo, useRef, useState } from "react"
 import { encrypt, decrypt, generateKey } from "@/lib/crypto"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,7 +12,11 @@ type AttestationStub = {
   receipt: string
 }
 
-export function PrivacyDemo() {
+type PrivacyDemoProps = {
+  demoMode?: boolean
+}
+
+export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
   const [ephemeralKey, setEphemeralKey] = useState<string>("")
   const [plaintext, setPlaintext] = useState("Classify this confidential document as legal, financial, or medical.")
   const [requestCipher, setRequestCipher] = useState<{ ciphertext: string; iv: string } | null>(null)
@@ -21,24 +25,26 @@ export function PrivacyDemo() {
   const [attestation, setAttestation] = useState<AttestationStub | null>(null)
   const [isBusy, setIsBusy] = useState(false)
   const [error, setError] = useState("")
+  const autoRunRef = useRef(false)
 
   const hasKey = useMemo(() => Boolean(ephemeralKey), [ephemeralKey])
 
-  const handleGenerateKey = async () => {
+  const resetState = () => {
     setError("")
     setDecryptedOutput("")
     setRequestCipher(null)
     setResponseCipher(null)
     setAttestation(null)
-    const key = await generateKey()
-    setEphemeralKey(key)
   }
 
-  const handleRunDemo = async () => {
-    if (!hasKey) {
-      setError("Generate an ephemeral key first.")
-      return
-    }
+  const handleGenerateKey = async () => {
+    resetState()
+    const key = await generateKey()
+    setEphemeralKey(key)
+    return key
+  }
+
+  const runDemo = async (keyValue: string, autoDecrypt = false) => {
     if (!plaintext.trim()) {
       setError("Enter some text to encrypt.")
       return
@@ -50,24 +56,42 @@ export function PrivacyDemo() {
 
     try {
       // Step 1: Encrypt client-side before sending to the service.
-      const encryptedInput = await encrypt(plaintext, ephemeralKey)
+      const encryptedInput = await encrypt(plaintext, keyValue)
       setRequestCipher(encryptedInput)
 
       // Step 2: Simulate enclave computation and attestation.
-      const decryptedInsideTEE = await decrypt(encryptedInput, ephemeralKey)
+      const decryptedInsideTEE = await decrypt(encryptedInput, keyValue)
       const processed = `Processed securely: ${decryptedInsideTEE}`
-      const encryptedOutput = await encrypt(processed, ephemeralKey)
+      const encryptedOutput = await encrypt(processed, keyValue)
       setResponseCipher(encryptedOutput)
       setAttestation({
         enclaveMeasurement: "simulated-sgx-measurement",
         proof: "demo-only: no real ZK proof",
         receipt: "settled in ETH on Horizen L3 (demo)",
       })
+
+      if (autoDecrypt) {
+        const plaintextOut = await decrypt(encryptedOutput, keyValue)
+        setDecryptedOutput(plaintextOut)
+      }
     } catch (e: any) {
       setError(e?.message || "Unable to run demo.")
     } finally {
       setIsBusy(false)
     }
+  }
+
+  const handleRunDemo = async () => {
+    if (!hasKey) {
+      setError("Generate an ephemeral key first.")
+      return
+    }
+    await runDemo(ephemeralKey, false)
+  }
+
+  const handleRunFullDemo = async () => {
+    const keyValue = hasKey ? ephemeralKey : await handleGenerateKey()
+    await runDemo(keyValue, true)
   }
 
   const handleDecryptOutput = async () => {
@@ -82,6 +106,16 @@ export function PrivacyDemo() {
       setError(e?.message || "Unable to decrypt output.")
     }
   }
+
+  useEffect(() => {
+    if (!demoMode) {
+      autoRunRef.current = false
+      return
+    }
+    if (autoRunRef.current) return
+    autoRunRef.current = true
+    void handleRunFullDemo()
+  }, [demoMode])
 
   return (
     <div className="rounded-xl border border-border bg-card p-6 space-y-4">
@@ -109,8 +143,11 @@ export function PrivacyDemo() {
       </div>
 
       <div className="flex flex-col md:flex-row gap-3">
-        <Button onClick={handleRunDemo} disabled={isBusy} className="md:w-44">
-          {isBusy ? "Running..." : "Encrypt + Simulate"}
+        <Button onClick={handleRunFullDemo} disabled={isBusy} className="md:w-44">
+          {isBusy ? "Running..." : "Run full demo"}
+        </Button>
+        <Button onClick={handleRunDemo} variant="outline" disabled={isBusy || !hasKey}>
+          Encrypt + Simulate
         </Button>
         <Button onClick={handleDecryptOutput} variant="secondary" disabled={!responseCipher || isBusy}>
           Decrypt output
@@ -149,6 +186,14 @@ export function PrivacyDemo() {
         ) : (
           <p className="text-xs text-muted-foreground">Run the demo to see a stub attestation.</p>
         )}
+      </div>
+
+      <div className="rounded-lg border border-border/60 bg-muted/20 p-3 text-xs text-muted-foreground space-y-1">
+        <p>
+          <span className="font-medium text-foreground">Privacy note:</span> The key never leaves your browser. Only
+          ciphertext is shown and would be sent to the service. Enclave and ZK proof are simulated here for demo
+          clarity.
+        </p>
       </div>
 
       <div className="rounded-lg border border-border/60 bg-muted/20 p-3 space-y-2">
