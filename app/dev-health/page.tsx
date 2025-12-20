@@ -1,8 +1,10 @@
-import { envStatus, appConfig } from "@/lib/config"
+import { getRuntimeEnvStatus, getRuntimeConfig } from "@/lib/config"
 
 export const metadata = {
   title: "Dev Health | Harpocrates",
 }
+
+export const dynamic = "force-dynamic"
 
 const buildInfo = [
   { label: "Node Env", value: process.env.NODE_ENV || "unknown" },
@@ -11,6 +13,9 @@ const buildInfo = [
 ]
 
 export default function DevHealthPage() {
+  const envStatus = getRuntimeEnvStatus()
+  const appConfig = getRuntimeConfig()
+
   return (
     <main className="min-h-screen bg-background px-4 py-16">
       <div className="container mx-auto max-w-5xl space-y-10">
