@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.24;
 
+
 /**
  * @title HarpocratesBilling
  * @notice Minimal ETH-denominated metering and settlement contract for Horizen L3.
