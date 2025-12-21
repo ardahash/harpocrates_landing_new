@@ -95,6 +95,14 @@ export async function POST(req: Request) {
       outputTokens,
     })
   } catch (error: any) {
-    return NextResponse.json({ error: error?.message || "Proof generation failed" }, { status: 500 })
+    console.error("zk/prove failed", {
+      message: error?.message,
+      stack: error?.stack,
+    })
+    const debug =
+      process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV !== "production"
+        ? { name: error?.name, stack: error?.stack }
+        : undefined
+    return NextResponse.json({ error: error?.message || "Proof generation failed", debug }, { status: 500 })
   }
 }
