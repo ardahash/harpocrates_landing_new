@@ -7,7 +7,10 @@
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start",
-    "test": "node --test tests/crypto.test.js"
+    "test": "node --test tests/crypto.test.js",
+    "zk:build": "node zk/scripts/build.js",
+    "zk:prove": "node zk/scripts/prove.js",
+    "zk:test": "node zk/scripts/verify.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -67,7 +70,10 @@
     "@types/node": "^22",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "circomlib": "^2.0.5",
+    "circomlibjs": "^0.1.7",
     "postcss": "^8.5",
+    "snarkjs": "^0.7.4",
     "tailwindcss": "^4.1.9",
     "tw-animate-css": "1.3.3",
     "typescript": "^5"

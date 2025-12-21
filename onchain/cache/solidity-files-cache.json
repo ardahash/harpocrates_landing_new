@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\Arda\\Downloads\\harpocrates_landing_new\\onchain\\contracts\\Billing.sol": {
-      "lastModificationDate": 1766130468810,
-      "contentHash": "f7b6ce0e4fe98a2c18edb4a9f1ec44f3",
+      "lastModificationDate": 1766256998306,
+      "contentHash": "53878882bd180a75596a03d2e0c629ed",
       "sourceName": "contracts/Billing.sol",
       "solcConfig": {
         "version": "0.8.24",
@@ -34,7 +34,44 @@
         "^0.8.24"
       ],
       "artifacts": [
-        "HarpocratesBilling"
+        "HarpocratesBilling",
+        "IVerifier"
+      ]
+    },
+    "C:\\Users\\Arda\\Downloads\\harpocrates_landing_new\\onchain\\contracts\\Verifier.sol": {
+      "lastModificationDate": 1766266420115,
+      "contentHash": "cbb69092333497061b944973bed2a936",
+      "sourceName": "contracts/Verifier.sol",
+      "solcConfig": {
+        "version": "0.8.24",
+        "settings": {
+          "optimizer": {
+            "enabled": true,
+            "runs": 200
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.0 <0.9.0"
+      ],
+      "artifacts": [
+        "Groth16Verifier"
       ]
     }
   }
