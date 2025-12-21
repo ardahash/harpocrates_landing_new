@@ -1,1 +1,6 @@
+await billing.pricePerTokenWei(modelId)
+await billing.setPrice(modelId, ethers.parseUnits("1", "gwei"))
+const modelId = ethers.id("llm-secure-7b")
+const billing = await ethers.getContractAt("HarpocratesBilling","0x7Db1745Af27E1313b912AB9e602eED823bd259fc")
+odelId)
 })  gasPrice: ethers.parseUnits("1", "gwei") // higher than before  gasLimit: 21000,  nonce: 0,  value: 0,  to: s.address,await s.sendTransaction({

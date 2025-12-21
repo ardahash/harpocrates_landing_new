@@ -28,6 +28,7 @@ type BillingResult = {
 }
 
 const explorerBase = appConfig.network.explorer?.replace(/\/$/, "")
+const SECRET_STORAGE_PREFIX = "harpocrates-user-secret:"
 
 function isWholeNumber(value: string) {
   return /^\d+$/.test(value)
@@ -42,6 +43,30 @@ async function deriveDemoScalar(seed: string) {
   const bytes = Array.from(new Uint8Array(digest)).slice(0, 31)
   const hex = bytes.map((b) => b.toString(16).padStart(2, "0")).join("")
   return BigInt(`0x${hex}`)
+}
+
+function generateRandomScalarHex() {
+  if (!globalThis.crypto?.getRandomValues) {
+    throw new Error("Secure random generator unavailable.")
+  }
+  const bytes = new Uint8Array(31)
+  globalThis.crypto.getRandomValues(bytes)
+  if (bytes.every((value) => value === 0)) {
+    bytes[0] = 1
+  }
+  const hex = Array.from(bytes)
+    .map((value) => value.toString(16).padStart(2, "0"))
+    .join("")
+  return `0x${hex}`
+}
+
+function getOrCreateUserSecret(address: string) {
+  const key = `${SECRET_STORAGE_PREFIX}${address.toLowerCase()}`
+  const stored = localStorage.getItem(key)
+  if (stored) return stored
+  const generated = generateRandomScalarHex()
+  localStorage.setItem(key, generated)
+  return generated
 }
 
 export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
@@ -59,6 +84,7 @@ export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
   const [modelId, setModelId] = useState(appConfig.demo?.modelId ?? "llm-secure-7b")
   const [inputTokens, setInputTokens] = useState(appConfig.demo?.inputTokens ?? "120")
   const [outputTokens, setOutputTokens] = useState(appConfig.demo?.outputTokens ?? "80")
+  const [userSecret, setUserSecret] = useState("")
   const [billingStatus, setBillingStatus] = useState<BillingStatus>("idle")
   const [billingError, setBillingError] = useState("")
   const [billingResult, setBillingResult] = useState<BillingResult | null>(null)
@@ -192,6 +218,10 @@ export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
         ])
         payload.userSecret = secret.toString()
         payload.nonce = nonce.toString()
+      } else {
+        const secret = userSecret || getOrCreateUserSecret(userAddress)
+        setUserSecret(secret)
+        payload.userSecret = BigInt(secret).toString()
       }
 
       const proveRes = await fetch("/api/zk/prove", {
@@ -262,6 +292,19 @@ export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
     autoRunRef.current = true
     void handleRunFullDemo()
   }, [demoMode])
+
+  useEffect(() => {
+    if (!userAddress || demoMode) {
+      setUserSecret("")
+      return
+    }
+    try {
+      const secret = getOrCreateUserSecret(userAddress)
+      setUserSecret(secret)
+    } catch (e: any) {
+      setBillingError(e?.message || "Unable to initialize user secret.")
+    }
+  }, [userAddress, demoMode])
 
   return (
     <div className="rounded-xl border border-border bg-card p-6 space-y-4">
@@ -369,6 +412,12 @@ export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
             />
           </div>
         </div>
+
+        {!demoMode && userAddress && (
+          <p className="text-[11px] text-muted-foreground">
+            Billing secret is stored locally per address. Clear site data to regenerate.
+          </p>
+        )}
 
         <div className="grid md:grid-cols-2 gap-3">
           <div className="space-y-1">

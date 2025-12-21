@@ -25,3 +25,6 @@ Thumbs.db
 docs/spec.md
 
 /specdocs
+/onchain/cache
+/onchain/cache
+onchain/cache/console-history.txt

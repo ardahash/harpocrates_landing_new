@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\Arda\\Downloads\\harpocrates_landing_new\\onchain\\contracts\\Billing.sol": {
-      "lastModificationDate": 1766256998306,
-      "contentHash": "53878882bd180a75596a03d2e0c629ed",
+      "lastModificationDate": 1766271718603,
+      "contentHash": "7bfbb839d77144909d3fc434ab9b7c3f",
       "sourceName": "contracts/Billing.sol",
       "solcConfig": {
         "version": "0.8.24",
