@@ -138,8 +138,10 @@ export async function generateBillingProof(input: BillingProofInput): Promise<Bi
 
   const { proof, publicSignals } = await snarkjs.groth16.fullProve(witnessInput, wasmPath, zkeyPath)
   const calldata = await snarkjs.groth16.exportSolidityCallData(proof, publicSignals)
-  const parsed = JSON.parse(`[${calldata}]`)
-  const [a, b, c, inputSignals] = parsed
+  const argv = calldata.replace(/["[\]\s]/g, "").split(",")
+  const a = argv.slice(0, 2)
+  const b = [argv.slice(2, 4), argv.slice(4, 6)]
+  const c = argv.slice(6, 8)
 
   return {
     usageHash: toHex32(usageHashField),
@@ -158,7 +160,7 @@ export async function generateBillingProof(input: BillingProofInput): Promise<Bi
       b: toStringMatrix(b),
       c: toStringArray(c),
     },
-    publicSignals: toStringArray(inputSignals),
+    publicSignals: toStringArray(publicSignals),
   }
 }
 
