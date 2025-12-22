@@ -20,6 +20,13 @@ export type BillingProofOutput = {
   nullifier: string
   costWei: string
   pricePerTokenWei: string
+  snarkProof: {
+    pi_a: string[]
+    pi_b: string[][]
+    pi_c: string[]
+    protocol: string
+    curve: string
+  }
   proof: {
     a: string[]
     b: string[][]
@@ -68,6 +75,14 @@ async function poseidonHash(inputs: bigint[]) {
   const field = poseidon.F
   const hash = poseidon(inputs)
   return BigInt(field.toObject(hash))
+}
+
+function toStringArray(values: unknown[]): string[] {
+  return values.map((value) => value.toString())
+}
+
+function toStringMatrix(values: unknown[][]): string[][] {
+  return values.map((row) => row.map((value) => value.toString()))
 }
 
 export async function generateBillingProof(input: BillingProofInput): Promise<BillingProofOutput> {
@@ -131,12 +146,19 @@ export async function generateBillingProof(input: BillingProofInput): Promise<Bi
     nullifier: toHex32(nullifierField),
     costWei: costWei.toString(),
     pricePerTokenWei: input.pricePerTokenWei.toString(),
-    proof: {
-      a: a.map((v: string) => v.toString()),
-      b: b.map((row: string[]) => row.map((v: string) => v.toString())),
-      c: c.map((v: string) => v.toString()),
+    snarkProof: {
+      pi_a: toStringArray(proof.pi_a),
+      pi_b: toStringMatrix(proof.pi_b),
+      pi_c: toStringArray(proof.pi_c),
+      protocol: proof.protocol,
+      curve: proof.curve,
     },
-    publicSignals: inputSignals.map((v: string) => v.toString()),
+    proof: {
+      a: toStringArray(a),
+      b: toStringMatrix(b),
+      c: toStringArray(c),
+    },
+    publicSignals: toStringArray(inputSignals),
   }
 }
 

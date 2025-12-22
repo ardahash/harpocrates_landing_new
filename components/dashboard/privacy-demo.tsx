@@ -237,6 +237,13 @@ export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
       const proof = proveData.proof as BillingResult & {
         proof: { a: string[]; b: string[][]; c: string[] }
         publicSignals?: string[]
+        snarkProof?: {
+          pi_a: string[]
+          pi_b: string[][]
+          pi_c: string[]
+          protocol: string
+          curve: string
+        }
       }
 
       setBillingResult({
@@ -259,6 +266,7 @@ export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
           costWei: proof.costWei,
           proof: proof.proof,
           publicSignals: proof.publicSignals,
+          snarkProof: proof.snarkProof,
         }),
       })
       if (!chargeRes.ok) {

@@ -14,6 +14,14 @@ type ProofPayload = {
   c: string[]
 }
 
+type SnarkProofPayload = {
+  pi_a: string[]
+  pi_b: string[][]
+  pi_c: string[]
+  protocol: string
+  curve: string
+}
+
 const TWO_POW_128 = BigInt("340282366920938463463374607431768211456")
 const SIGNAL_LABELS = [
   "userLo",
@@ -101,9 +109,11 @@ function describePayload(payload: {
   pricePerTokenWei?: string
   costWei?: string
   proof?: ProofPayload
+  snarkProof?: SnarkProofPayload
   publicSignals?: unknown
 }) {
   const proof = payload.proof
+  const snarkProof = payload.snarkProof
   const publicSignals = payload.publicSignals
   return {
     userAddress: payload.userAddress,
@@ -121,6 +131,17 @@ function describePayload(payload: {
           cLen: proof.c?.length ?? null,
         }
       : null,
+    snarkProofShape: snarkProof
+      ? {
+          aLen: snarkProof.pi_a?.length ?? null,
+          bLen: snarkProof.pi_b?.length ?? null,
+          b0Len: snarkProof.pi_b?.[0]?.length ?? null,
+          b1Len: snarkProof.pi_b?.[1]?.length ?? null,
+          cLen: snarkProof.pi_c?.length ?? null,
+          protocol: snarkProof.protocol ?? null,
+          curve: snarkProof.curve ?? null,
+        }
+      : null,
     publicSignalsLen: Array.isArray(publicSignals) ? publicSignals.length : null,
   }
 }
@@ -135,6 +156,7 @@ export async function POST(req: Request) {
     const pricePerTokenWei = body.pricePerTokenWei as string
     const costWei = body.costWei as string
     const proof = body.proof as ProofPayload
+    const snarkProof = body.snarkProof as SnarkProofPayload | undefined
     const publicSignals = body.publicSignals as string[] | undefined
 
     if (!userAddress || !modelId || !usageHash || !nullifier || !pricePerTokenWei || !costWei || !proof) {
@@ -253,12 +275,15 @@ export async function POST(req: Request) {
       }
 
       const vkeyPath = path.join(process.cwd(), "zk", "build", "verification_key.json")
+      if (!snarkProof) {
+        return NextResponse.json({ error: "Missing snark proof for verification" }, { status: 400 })
+      }
       if (!fs.existsSync(vkeyPath)) {
         return NextResponse.json({ error: "Missing verification key" }, { status: 500 })
       }
       const snarkjs = await import("snarkjs")
       const vkey = JSON.parse(fs.readFileSync(vkeyPath, "utf8"))
-      const isValid = await snarkjs.groth16.verify(vkey, publicSignals, proof)
+      const isValid = await snarkjs.groth16.verify(vkey, publicSignals, snarkProof)
       if (!isValid) {
         return NextResponse.json({ error: "Proof verification failed off-chain" }, { status: 400 })
       }
