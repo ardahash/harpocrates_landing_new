@@ -86,6 +86,10 @@ function buildExpectedSignals(params: {
   ].map((value) => value.toString())
 }
 
+function toUint256Array(values: string[]) {
+  return values.map((value) => BigInt(value))
+}
+
 function isArrayOfLength(value: unknown, length: number) {
   return Array.isArray(value) && value.length === length
 }
@@ -211,7 +215,11 @@ export async function POST(req: Request) {
     const contract = new ethers.Contract(
       appConfig.billingContract,
       [
+        "function balances(address) view returns (uint256)",
         "function billingRole() view returns (address)",
+        "function nullifierUsed(bytes32) view returns (bool)",
+        "function pricePerTokenWei(bytes32) view returns (uint256)",
+        "function verifier() view returns (address)",
         "function chargeWithProof(address,bytes32,uint256,uint256,bytes32,bytes32,uint256[2],uint256[2][2],uint256[2])",
       ],
       signer,
@@ -223,6 +231,34 @@ export async function POST(req: Request) {
     }
 
     const modelIdHex = normalizeModelIdHex(modelId)
+    const [priceOnChain, userBalance, nullifierSeen, verifierAddr] = await Promise.all([
+      contract.pricePerTokenWei(modelIdHex),
+      contract.balances(userAddress),
+      contract.nullifierUsed(nullifier),
+      contract.verifier(),
+    ])
+
+    if (priceOnChain.toString() !== pricePerTokenWei) {
+      return NextResponse.json(
+        {
+          error: "Price mismatch on-chain",
+          debug:
+            process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV !== "production"
+              ? { expected: priceOnChain.toString(), received: pricePerTokenWei }
+              : undefined,
+        },
+        { status: 400 },
+      )
+    }
+    if (nullifierSeen) {
+      return NextResponse.json({ error: "Nullifier already used" }, { status: 400 })
+    }
+    if (verifierAddr === ethers.ZeroAddress) {
+      return NextResponse.json({ error: "Verifier not set on-chain" }, { status: 400 })
+    }
+    if (userBalance < BigInt(costWei)) {
+      return NextResponse.json({ error: "Insufficient on-chain balance" }, { status: 400 })
+    }
 
     if (publicSignals) {
       const expected = buildExpectedSignals({
@@ -286,6 +322,26 @@ export async function POST(req: Request) {
       const isValid = await snarkjs.groth16.verify(vkey, publicSignals, snarkProof)
       if (!isValid) {
         return NextResponse.json({ error: "Proof verification failed off-chain" }, { status: 400 })
+      }
+
+      const verifier = new ethers.Contract(
+        verifierAddr,
+        ["function verifyProof(uint256[2],uint256[2][2],uint256[2],uint256[12]) view returns (bool)"],
+        signer.provider,
+      )
+      const inputs = toUint256Array(expectedNormalized)
+      const onChainValid = await verifier.verifyProof(proof.a, proof.b, proof.c, inputs)
+      if (!onChainValid) {
+        return NextResponse.json(
+          {
+            error: "On-chain verifier rejected proof",
+            debug:
+              process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV !== "production"
+                ? { verifier: verifierAddr }
+                : undefined,
+          },
+          { status: 400 },
+        )
       }
     }
     const tx = await contract.chargeWithProof(
