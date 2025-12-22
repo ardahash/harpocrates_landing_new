@@ -93,6 +93,38 @@ function isValidProof(proof: ProofPayload) {
   )
 }
 
+function describePayload(payload: {
+  userAddress?: string
+  modelId?: string
+  usageHash?: string
+  nullifier?: string
+  pricePerTokenWei?: string
+  costWei?: string
+  proof?: ProofPayload
+  publicSignals?: unknown
+}) {
+  const proof = payload.proof
+  const publicSignals = payload.publicSignals
+  return {
+    userAddress: payload.userAddress,
+    modelId: payload.modelId,
+    usageHash: payload.usageHash,
+    nullifier: payload.nullifier,
+    pricePerTokenWei: payload.pricePerTokenWei,
+    costWei: payload.costWei,
+    proofShape: proof
+      ? {
+          aLen: proof.a?.length ?? null,
+          bLen: proof.b?.length ?? null,
+          b0Len: proof.b?.[0]?.length ?? null,
+          b1Len: proof.b?.[1]?.length ?? null,
+          cLen: proof.c?.length ?? null,
+        }
+      : null,
+    publicSignalsLen: Array.isArray(publicSignals) ? publicSignals.length : null,
+  }
+}
+
 export async function POST(req: Request) {
   try {
     const body = await req.json()
@@ -118,7 +150,25 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "Invalid price or cost" }, { status: 400 })
     }
     if (!isValidProof(proof)) {
-      return NextResponse.json({ error: "Invalid proof format" }, { status: 400 })
+      return NextResponse.json(
+        {
+          error: "Invalid proof format",
+          debug:
+            process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV !== "production"
+              ? describePayload({
+                  userAddress,
+                  modelId,
+                  usageHash,
+                  nullifier,
+                  pricePerTokenWei,
+                  costWei,
+                  proof,
+                  publicSignals,
+                })
+              : undefined,
+        },
+        { status: 400 },
+      )
     }
     if (publicSignals && (!Array.isArray(publicSignals) || publicSignals.length !== 12)) {
       return NextResponse.json({ error: "Invalid public signals" }, { status: 400 })
@@ -162,7 +212,25 @@ export async function POST(req: Request) {
         nullifier,
       })
       const expectedNormalized = expected.map((value) => BigInt(value).toString())
-      const provided = publicSignals.map((value) => BigInt(value).toString())
+      let provided: string[]
+      try {
+        provided = publicSignals.map((value) => BigInt(value).toString())
+      } catch (err: any) {
+        console.error("zk/charge invalid public signals", {
+          message: err?.message,
+          payload: describePayload({
+            userAddress,
+            modelId,
+            usageHash,
+            nullifier,
+            pricePerTokenWei,
+            costWei,
+            proof,
+            publicSignals,
+          }),
+        })
+        return NextResponse.json({ error: "Invalid public signals values" }, { status: 400 })
+      }
       const matches = expectedNormalized.every((value, index) => value === provided[index])
       if (!matches) {
         const diffs = expectedNormalized
@@ -214,6 +282,10 @@ export async function POST(req: Request) {
       status: receipt?.status ?? null,
     })
   } catch (error: any) {
+    console.error("zk/charge failed", {
+      message: error?.message,
+      stack: error?.stack,
+    })
     return NextResponse.json({ error: error?.message || "Charge failed" }, { status: 500 })
   }
 }
