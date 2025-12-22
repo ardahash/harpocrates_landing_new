@@ -40,7 +40,6 @@ const navigation = [
     title: "Resources",
     items: [
       { title: "FAQ", href: "/docs/faq" },
-      // { title: "Changelog", href: "/docs/changelog" },
     ],
   },
 ]
