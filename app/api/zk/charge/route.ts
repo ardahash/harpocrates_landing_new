@@ -15,6 +15,20 @@ type ProofPayload = {
 }
 
 const TWO_POW_128 = BigInt("340282366920938463463374607431768211456")
+const SIGNAL_LABELS = [
+  "userLo",
+  "userHi",
+  "modelIdLo",
+  "modelIdHi",
+  "priceLo",
+  "priceHi",
+  "costLo",
+  "costHi",
+  "usageHashLo",
+  "usageHashHi",
+  "nullifierLo",
+  "nullifierHi",
+]
 
 function splitToLimbs(value: bigint) {
   const lo = value % TWO_POW_128
@@ -147,9 +161,26 @@ export async function POST(req: Request) {
         usageHash,
         nullifier,
       })
-      const matches = expected.every((value, index) => value === publicSignals[index])
+      const provided = publicSignals.map((value) => value.toString())
+      const matches = expected.every((value, index) => value === provided[index])
       if (!matches) {
-        return NextResponse.json({ error: "Public signals do not match inputs" }, { status: 400 })
+        const diffs = expected
+          .map((value, index) =>
+            value === provided[index]
+              ? null
+              : { index, label: SIGNAL_LABELS[index], expected: value, received: provided[index] },
+          )
+          .filter(Boolean)
+        console.error("zk/charge public signal mismatch", {
+          expected,
+          received: provided,
+          diffs,
+        })
+        const debug =
+          process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV !== "production"
+            ? { diffs }
+            : undefined
+        return NextResponse.json({ error: "Public signals do not match inputs", debug }, { status: 400 })
       }
 
       const vkeyPath = path.join(process.cwd(), "zk", "build", "verification_key.json")
