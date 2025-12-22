@@ -1,3 +1,16 @@
+await billing.balances("0xc1D0Ea90A55Bca742FEBdF34BE3F367259F79fc1")
+await billing.connect(await ethers.getSigner("0xc1D0Ea90A55Bca742FEBdF34BE3F367259F79fc1")).fund({ value: ethers.parseEther("0.001") })
+  .fund({ value: ethers.parseEther("0.001") })
+await billing.connect(await ethers.getSigner("0xc1D0Ea90A55Bca742FEBdF34BE3F367259F79fc1"))
+  .fund({ value: ethers.parseEther("0.001") })
+await billing.connect(await ethers.getSigner("0xc1D0Ea90A55Bca742FEBdF34BE3F367259F79fc1"))
+await billing.pricePerTokenWei(ethers.id("llm-secure-7b")) // should be 1e9
+await billing.balances("0xc1D0Ea90A55Bca742FEBdF34BE3F367259F79fc1") // must be >= costWei
+await billing.setVerifier(await verifier.getAddress())
+await verifier.waitForDeployment()
+const verifier = await Verifier.deploy()
+const Verifier = await ethers.getContractFactory("Groth16Verifier")
+const billing = await ethers.getContractAt("HarpocratesBilling","0x7Db1745Af27E1313b912AB9e602eED823bd259fc")
 await billing.pricePerTokenWei(modelId)
 await billing.setPrice(modelId, ethers.parseUnits("1", "gwei"))
 const modelId = ethers.id("llm-secure-7b")
