@@ -2,8 +2,8 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\Arda\\Downloads\\harpocrates_landing_new\\onchain\\contracts\\Billing.sol": {
-      "lastModificationDate": 1766271718603,
-      "contentHash": "7bfbb839d77144909d3fc434ab9b7c3f",
+      "lastModificationDate": 1766436262411,
+      "contentHash": "c3a95107ddd9dedb9d137fbb980f454b",
       "sourceName": "contracts/Billing.sol",
       "solcConfig": {
         "version": "0.8.24",
@@ -39,8 +39,8 @@
       ]
     },
     "C:\\Users\\Arda\\Downloads\\harpocrates_landing_new\\onchain\\contracts\\Verifier.sol": {
-      "lastModificationDate": 1766434730449,
-      "contentHash": "1bb33c0798ea16539233f35533222b30",
+      "lastModificationDate": 1766436289473,
+      "contentHash": "ba48c78f95b00cdbbf59067cbc6ae89f",
       "sourceName": "contracts/Verifier.sol",
       "solcConfig": {
         "version": "0.8.24",

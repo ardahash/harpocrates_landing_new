@@ -236,6 +236,7 @@ export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
       const proveData = await proveRes.json()
       const proof = proveData.proof as BillingResult & {
         proof: { a: string[]; b: string[][]; c: string[] }
+        publicSignals?: string[]
       }
 
       setBillingResult({
@@ -257,6 +258,7 @@ export function PrivacyDemo({ demoMode = false }: PrivacyDemoProps) {
           pricePerTokenWei: proof.pricePerTokenWei,
           costWei: proof.costWei,
           proof: proof.proof,
+          publicSignals: proof.publicSignals,
         }),
       })
       if (!chargeRes.ok) {

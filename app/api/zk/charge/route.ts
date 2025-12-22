@@ -5,11 +5,63 @@ import { NextResponse } from "next/server"
 import { ethers } from "ethers"
 import { getRuntimeConfig } from "@/lib/config"
 import { normalizeModelIdHex } from "@/lib/zk/proof"
+import fs from "node:fs"
+import path from "node:path"
 
 type ProofPayload = {
   a: string[]
   b: string[][]
   c: string[]
+}
+
+const TWO_POW_128 = BigInt("340282366920938463463374607431768211456")
+
+function splitToLimbs(value: bigint) {
+  const lo = value % TWO_POW_128
+  const hi = value / TWO_POW_128
+  return { lo, hi }
+}
+
+function toBigInt(value: string) {
+  return BigInt(value)
+}
+
+function buildExpectedSignals(params: {
+  userAddress: string
+  modelId: string
+  pricePerTokenWei: string
+  costWei: string
+  usageHash: string
+  nullifier: string
+}) {
+  const userField = BigInt(ethers.getAddress(params.userAddress))
+  const modelField = BigInt(params.modelId)
+  const priceField = toBigInt(params.pricePerTokenWei)
+  const costField = toBigInt(params.costWei)
+  const usageField = BigInt(params.usageHash)
+  const nullField = BigInt(params.nullifier)
+
+  const userLimbs = splitToLimbs(userField)
+  const modelLimbs = splitToLimbs(modelField)
+  const priceLimbs = splitToLimbs(priceField)
+  const costLimbs = splitToLimbs(costField)
+  const usageLimbs = splitToLimbs(usageField)
+  const nullLimbs = splitToLimbs(nullField)
+
+  return [
+    userLimbs.lo,
+    userLimbs.hi,
+    modelLimbs.lo,
+    modelLimbs.hi,
+    priceLimbs.lo,
+    priceLimbs.hi,
+    costLimbs.lo,
+    costLimbs.hi,
+    usageLimbs.lo,
+    usageLimbs.hi,
+    nullLimbs.lo,
+    nullLimbs.hi,
+  ].map((value) => value.toString())
 }
 
 function isArrayOfLength(value: unknown, length: number) {
@@ -37,6 +89,7 @@ export async function POST(req: Request) {
     const pricePerTokenWei = body.pricePerTokenWei as string
     const costWei = body.costWei as string
     const proof = body.proof as ProofPayload
+    const publicSignals = body.publicSignals as string[] | undefined
 
     if (!userAddress || !modelId || !usageHash || !nullifier || !pricePerTokenWei || !costWei || !proof) {
       return NextResponse.json({ error: "Missing charge payload" }, { status: 400 })
@@ -52,6 +105,9 @@ export async function POST(req: Request) {
     }
     if (!isValidProof(proof)) {
       return NextResponse.json({ error: "Invalid proof format" }, { status: 400 })
+    }
+    if (publicSignals && (!Array.isArray(publicSignals) || publicSignals.length !== 12)) {
+      return NextResponse.json({ error: "Invalid public signals" }, { status: 400 })
     }
 
     const appConfig = getRuntimeConfig()
@@ -81,6 +137,32 @@ export async function POST(req: Request) {
     }
 
     const modelIdHex = normalizeModelIdHex(modelId)
+
+    if (publicSignals) {
+      const expected = buildExpectedSignals({
+        userAddress,
+        modelId: modelIdHex,
+        pricePerTokenWei,
+        costWei,
+        usageHash,
+        nullifier,
+      })
+      const matches = expected.every((value, index) => value === publicSignals[index])
+      if (!matches) {
+        return NextResponse.json({ error: "Public signals do not match inputs" }, { status: 400 })
+      }
+
+      const vkeyPath = path.join(process.cwd(), "zk", "build", "verification_key.json")
+      if (!fs.existsSync(vkeyPath)) {
+        return NextResponse.json({ error: "Missing verification key" }, { status: 500 })
+      }
+      const snarkjs = await import("snarkjs")
+      const vkey = JSON.parse(fs.readFileSync(vkeyPath, "utf8"))
+      const isValid = await snarkjs.groth16.verify(vkey, publicSignals, proof)
+      if (!isValid) {
+        return NextResponse.json({ error: "Proof verification failed off-chain" }, { status: 400 })
+      }
+    }
     const tx = await contract.chargeWithProof(
       userAddress,
       modelIdHex,
