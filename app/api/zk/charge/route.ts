@@ -161,10 +161,11 @@ export async function POST(req: Request) {
         usageHash,
         nullifier,
       })
-      const provided = publicSignals.map((value) => value.toString())
-      const matches = expected.every((value, index) => value === provided[index])
+      const expectedNormalized = expected.map((value) => BigInt(value).toString())
+      const provided = publicSignals.map((value) => BigInt(value).toString())
+      const matches = expectedNormalized.every((value, index) => value === provided[index])
       if (!matches) {
-        const diffs = expected
+        const diffs = expectedNormalized
           .map((value, index) =>
             value === provided[index]
               ? null
