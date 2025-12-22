@@ -41,14 +41,19 @@ if (!fs.existsSync(ptau)) {
 
 console.log("Generating zkey...")
 const r1cs = path.join(buildDir, "billing.r1cs")
-const zkey = path.join(buildDir, "billing.zkey")
-run(`snarkjs groth16 setup ${r1cs} ${ptau} ${zkey}`)
-run(`snarkjs zkey contribute ${zkey} ${zkey} --name="Harpocrates" -v`)
+const zkeyInitial = path.join(buildDir, "billing_0000.zkey")
+const zkeyFinal = path.join(buildDir, "billing.zkey")
+run(`snarkjs groth16 setup ${r1cs} ${ptau} ${zkeyInitial}`)
+const zkeyEntropy = `${process.env.ZK_ENTROPY || "harpocrates-demo-entropy"}\n`
+run(`snarkjs zkey contribute ${zkeyInitial} ${zkeyFinal} --name="Harpocrates" -v`, root, zkeyEntropy)
+if (fs.existsSync(zkeyInitial)) {
+  fs.unlinkSync(zkeyInitial)
+}
 
 console.log("Exporting verification key and verifier...")
-run(`snarkjs zkey export verificationkey ${zkey} ${path.join(buildDir, "verification_key.json")}`)
+run(`snarkjs zkey export verificationkey ${zkeyFinal} ${path.join(buildDir, "verification_key.json")}`)
 const generatedVerifier = path.join(buildDir, "Verifier.sol")
-run(`snarkjs zkey export solidityverifier ${zkey} ${generatedVerifier}`)
+run(`snarkjs zkey export solidityverifier ${zkeyFinal} ${generatedVerifier}`)
 
 console.log("Copying verifier to onchain/contracts...")
 fs.copyFileSync(generatedVerifier, onchainVerifier)

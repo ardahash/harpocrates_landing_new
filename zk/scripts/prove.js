@@ -16,18 +16,23 @@ function run(cmd, cwd = root) {
   execSync(cmd, { stdio: "inherit", cwd })
 }
 
-if (!fs.existsSync(wasm) || !fs.existsSync(zkey)) {
-  throw new Error("Missing build artifacts. Run npm run zk:build first.")
-}
+(async () => {
+  if (!fs.existsSync(wasm) || !fs.existsSync(zkey)) {
+    throw new Error("Missing build artifacts. Run npm run zk:build first.")
+  }
 
-console.log("Computing example public signals...")
-const publicSignals = calculatePublicSignals(inputFile)
-fs.writeFileSync(publicOut, JSON.stringify(publicSignals, null, 2))
+  console.log("Computing example public signals...")
+  const publicSignals = await calculatePublicSignals(inputFile)
+  fs.writeFileSync(publicOut, JSON.stringify(publicSignals, null, 2))
 
-console.log("Generating witness...")
-run(`node ${path.join(buildDir, "billing_js", "generate_witness.js")} ${wasm} ${inputFile} ${witness}`)
+  console.log("Generating witness...")
+  run(`node ${path.join(buildDir, "billing_js", "generate_witness.js")} ${wasm} ${inputFile} ${witness}`)
 
-console.log("Generating proof...")
-run(`snarkjs groth16 prove ${zkey} ${witness} ${proofOut} ${publicOut}`)
+  console.log("Generating proof...")
+  run(`snarkjs groth16 prove ${zkey} ${witness} ${proofOut} ${publicOut}`)
 
-console.log("Proof written to", proofOut)
+  console.log("Proof written to", proofOut)
+})().catch((error) => {
+  console.error(error)
+  process.exit(1)
+})
