@@ -7,7 +7,10 @@
     "dev": "next dev",
     "lint": "eslint .",
     "start": "next start",
-    "test": "node --test tests/crypto.test.js"
+    "test": "node --test tests/crypto.test.js",
+    "zk:build": "node zk/scripts/build.js",
+    "zk:prove": "node zk/scripts/prove.js",
+    "zk:test": "node zk/scripts/verify.js"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
@@ -45,6 +48,8 @@
     "cmdk": "1.0.4",
     "date-fns": "4.1.0",
     "embla-carousel-react": "8.5.1",
+    "circomlib": "^2.0.5",
+    "circomlibjs": "^0.1.7",
     "ethers": "^6.13.4",
     "input-otp": "1.4.1",
     "lucide-react": "^0.454.0",
@@ -56,6 +61,7 @@
     "react-hook-form": "^7.60.0",
     "react-resizable-panels": "^2.1.7",
     "recharts": "2.15.4",
+    "snarkjs": "^0.7.4",
     "sonner": "^1.7.4",
     "tailwind-merge": "^2.5.5",
     "tailwindcss-animate": "^1.0.7",

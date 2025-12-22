@@ -31,6 +31,7 @@ const navigation = [
     title: "Integration",
     items: [
       { title: "Settlement on Horizen L3", href: "/docs/zen-integration" },
+      { title: "ZK Billing Proofs", href: "/docs/zk-billing" },
       { title: "Production", href: "/docs/production" },
       { title: "Security & Privacy", href: "/docs/security" },
     ],
@@ -39,7 +40,6 @@ const navigation = [
     title: "Resources",
     items: [
       { title: "FAQ", href: "/docs/faq" },
-      { title: "Changelog", href: "/docs/changelog" },
     ],
   },
 ]

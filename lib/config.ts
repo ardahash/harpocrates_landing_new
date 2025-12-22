@@ -10,6 +10,12 @@ type AppConfig = {
   apiBaseUrl: string
   billingContract: string
   network: NetworkConfig
+  demo: {
+    userAddress: string
+    modelId: string
+    inputTokens: string
+    outputTokens: string
+  }
 }
 
 const env = process.env
@@ -23,6 +29,12 @@ export const appConfig: AppConfig = {
     rpcUrl: env.NEXT_PUBLIC_HORIZEN_L3_RPC_URL ?? "",
     chainId: Number(env.NEXT_PUBLIC_HORIZEN_L3_CHAIN_ID ?? "0") || undefined,
     explorer: env.NEXT_PUBLIC_HORIZEN_L3_EXPLORER ?? "",
+  },
+  demo: {
+    userAddress: env.NEXT_PUBLIC_DEMO_USER_ADDRESS ?? "",
+    modelId: env.NEXT_PUBLIC_DEMO_MODEL_ID ?? "llm-secure-7b",
+    inputTokens: env.NEXT_PUBLIC_DEMO_INPUT_TOKENS ?? "120",
+    outputTokens: env.NEXT_PUBLIC_DEMO_OUTPUT_TOKENS ?? "80",
   },
 }
 
@@ -45,6 +57,12 @@ export function getRuntimeConfig(): AppConfig {
       rpcUrl: runtimeEnv.NEXT_PUBLIC_HORIZEN_L3_RPC_URL ?? "",
       chainId: Number(runtimeEnv.NEXT_PUBLIC_HORIZEN_L3_CHAIN_ID ?? "0") || undefined,
       explorer: runtimeEnv.NEXT_PUBLIC_HORIZEN_L3_EXPLORER ?? "",
+    },
+    demo: {
+      userAddress: runtimeEnv.NEXT_PUBLIC_DEMO_USER_ADDRESS ?? "",
+      modelId: runtimeEnv.NEXT_PUBLIC_DEMO_MODEL_ID ?? "llm-secure-7b",
+      inputTokens: runtimeEnv.NEXT_PUBLIC_DEMO_INPUT_TOKENS ?? "120",
+      outputTokens: runtimeEnv.NEXT_PUBLIC_DEMO_OUTPUT_TOKENS ?? "80",
     },
   }
 }
