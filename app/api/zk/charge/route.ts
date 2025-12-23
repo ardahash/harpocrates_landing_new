@@ -231,6 +231,8 @@ export async function POST(req: Request) {
     }
 
     const modelIdHex = normalizeModelIdHex(modelId)
+    const priceValue = BigInt(pricePerTokenWei)
+    const costValue = BigInt(costWei)
     const [priceOnChain, userBalance, nullifierSeen, verifierAddr] = await Promise.all([
       contract.pricePerTokenWei(modelIdHex),
       contract.balances(userAddress),
@@ -238,7 +240,7 @@ export async function POST(req: Request) {
       contract.verifier(),
     ])
 
-    if (priceOnChain.toString() !== pricePerTokenWei) {
+    if (priceOnChain !== priceValue) {
       return NextResponse.json(
         {
           error: "Price mismatch on-chain",
@@ -256,7 +258,7 @@ export async function POST(req: Request) {
     if (verifierAddr === ethers.ZeroAddress) {
       return NextResponse.json({ error: "Verifier not set on-chain" }, { status: 400 })
     }
-    if (userBalance < BigInt(costWei)) {
+    if (userBalance < costValue) {
       return NextResponse.json({ error: "Insufficient on-chain balance" }, { status: 400 })
     }
 
@@ -338,23 +340,35 @@ export async function POST(req: Request) {
             debug:
               process.env.VERCEL_ENV === "preview" || process.env.NODE_ENV !== "production"
                 ? { verifier: verifierAddr }
-                : undefined,
+              : undefined,
           },
           { status: 400 },
         )
       }
     }
-    const tx = await contract.chargeWithProof(
+    const callArgs = [
       userAddress,
       modelIdHex,
-      pricePerTokenWei,
-      costWei,
+      priceValue,
+      costValue,
       usageHash,
       nullifier,
       proof.a,
       proof.b,
       proof.c,
-    )
+    ] as const
+    try {
+      await contract.chargeWithProof.staticCall(...callArgs)
+    } catch (err: any) {
+      const message =
+        err?.shortMessage ||
+        err?.reason ||
+        err?.message ||
+        "chargeWithProof simulation failed"
+      return NextResponse.json({ error: message }, { status: 400 })
+    }
+
+    const tx = await contract.chargeWithProof(...callArgs)
     const receipt = await tx.wait()
 
     return NextResponse.json({
