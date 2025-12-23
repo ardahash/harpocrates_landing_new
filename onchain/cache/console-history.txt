@@ -1,3 +1,7 @@
+await billing.connect(await ethers.getSigner("0xc1D0Ea90A55Bca742FEBdF34BE3F367259F79fc1")).fund({ value: ethers.parseEther("0.001") })
+await billing.setPrice(modelId, ethers.parseUnits("1", "gwei"))
+const modelId = ethers.id("llm-secure-7b")
+const billing = await ethers.getContractAt("HarpocratesBilling","0xea30409f2f4a49d55B674B95CA0DCacD7b41Fd4c")
 const billing = await ethers.getContractAt("HarpocratesBilling","0x7Db1745Af27E1313b912AB9e602eED823bd259fc")
 await billing.setVerifier(await verifier.getAddress())
 await verifier.waitForDeployment()
